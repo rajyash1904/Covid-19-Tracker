@@ -3,29 +3,25 @@ import { Circle, Popup} from "react-leaflet";
 
 const casesTypeColors = {
     cases: {
-      hex: "#CC1034",
-      half_op: "rgba(204, 16, 52, 0.5)",
-      multiplier: 160,
+        hex: "#CC1034",
+        half_op: "rgba(204, 16, 52, 0.5)",
+        multiplier: 160,
     },
     recovered: {
-      hex: "#7dd71d",
-      half_op: "rgba(125, 215, 29, 0.5)",
-      multiplier: 240,
+        hex: "#7dd71d",
+        half_op: "rgba(125, 215, 29, 0.5)",
+        multiplier: 240,
     },
     deaths: {
-      hex: "#fb4443",
-      half_op: "rgba(251, 68, 67, 0.5)",
-      multiplier: 400,
+        hex: "#fb4443",
+        half_op: "rgba(251, 68, 67, 0.5)",
+        multiplier: 400,
     },
   };
 
-export const SortData = (data) => {
-    const sortedData = [...data];
-    return sortedData.sort((a,b)=>(a.cases>b.cases?-1:1));
-};
+export const SortData = (data) => data.sort((a,b)=>(a.cases>b.cases?-1:1));
 
-export const prettyPrintStat = (stat) => 
-    stat ? `+${numeral(stat).format("0.0a")}` : "+0";
+export const prettyPrintStat = (stat) => stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 
 //DRAW circles on the map with interactive tooltip
 export const showDataOnMap = (data, casesType='cases')=> (

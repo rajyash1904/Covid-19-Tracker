@@ -1,11 +1,11 @@
 import './App.css';
 import {MenuItem, FormControl,Select,Card,CardContent} from "@material-ui/core";
 import { useEffect, useState } from 'react';
-import InfoBox from './InfoBox';
-import Mp from './Mp';
-import Table from './Table';
+import InfoBox from './Info/InfoBox';
+import Mp from './Map/Mp';
+import Table from './Table/Table';
 import { SortData, prettyPrintStat } from './util';
-import LineGraph from './LineGraph';
+import LineGraph from './Graphs/LineGraph';
 import "leaflet/dist/leaflet.css";
 
 
@@ -85,7 +85,7 @@ function App() {
           <div className="app__stats">
             {/*Infoboxes */}
             <InfoBox 
-              isRed
+              isRed = {true}
               active = {casesType==="cases"}
               onClick= {e=> setCasesType('cases')}
               title="Coronavirus Cases" 
@@ -93,6 +93,7 @@ function App() {
               total={prettyPrintStat(countryInfo.cases)}/>
             {/*Infoboxes */}
             <InfoBox 
+              isRed = {false}
               active = {casesType==="recovered"}
               onClick = {e => setCasesType('recovered')}
               title="Recovered" 
@@ -100,7 +101,7 @@ function App() {
               total={prettyPrintStat(countryInfo.recovered)}/>
             {/*InfoBoxes */}
             <InfoBox 
-              isRed
+              isRed = {true}
               active = {casesType==="deaths"}
               onClick = {e => setCasesType('deaths')}
               title="Deaths" 

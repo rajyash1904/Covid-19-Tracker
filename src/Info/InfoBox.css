@@ -1,6 +1,7 @@
 .infoBox {
     flex: 1;
     cursor: pointer;
+    font-family: 'Bebas Neue', cursive !important;
 }
 
 .infoBox:not(:last-child) {
