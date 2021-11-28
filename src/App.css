@@ -5,7 +5,7 @@
 }
 
 body{
-  background-color: #f5f6fa;
+  background-color: #000000;
 }
 
 
@@ -21,7 +21,7 @@ body{
 }
 
 .app_header > h1 {
-  color: #fc3c3c;
+  color: #FFFFFF;
   font-size: 2rem;
 }
 
