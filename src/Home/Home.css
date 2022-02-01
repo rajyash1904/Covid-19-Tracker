@@ -1,0 +1,29 @@
+.Home{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background-color: #000000;
+    height: 80px;
+}
+
+.NavButton{
+    margin-top: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: auto;
+    background-color: #000000;
+    font-size: 20px;
+    color: #FFFFFF;
+    height: 50px;
+    width: auto;
+    border: none;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+.NavButton:hover{
+    font-size: 40px;
+    color: #FFC300;
+    cursor: pointer;
+}

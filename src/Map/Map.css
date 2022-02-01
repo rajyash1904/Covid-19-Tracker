@@ -24,14 +24,10 @@
 
 .info-flag {
     height: 80px;
-    width: 100%;
     background-size: cover;
     border-radius: 8px;
 }
-
-.info-confirmed,
-.info-recovered,
-.info-deaths {
+.info-stats {
     font-size: 16px;
     margin-top: 5px;
 }

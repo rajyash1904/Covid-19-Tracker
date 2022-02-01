@@ -48,51 +48,66 @@ const options = {
   },
 };
 
-const buildChartData = (data, casesType='cases') => {
+const buildChartData = (data, caseType = 'cases', country = 'worldwide') => {
   let chartData = [];
-  let lastDataPoint;
-  for (let date in data.cases) {
-    if (lastDataPoint) {
-      let newDataPoint = {
-        x: date,
-        y: data[casesType][date] - lastDataPoint,
-      };
-      chartData.push(newDataPoint);
-    }
-    lastDataPoint = data[casesType][date];
+  let points = null;
+  if (country === 'worldwide'){
+    points = data[caseType];
+  } else {
+    const jsonKeyForData = 'timeline';
+    points = data[jsonKeyForData][caseType];
+  }
+  for (const point in points) {
+    chartData.push({
+      x: point,
+      y: points[point],
+    });
   }
   return chartData;
 };
 
-function LineGraph({ className, casesType }) {
-  const [data, setData] = useState({});
+const LineColour = {
+  cases: {
+    backgroundColor : "rgba(204, 16, 52, 0.5)",
+    borderColor : "#CC1034",
+  },
+  deaths: {
+    backgroundColor : "rgba(199, 197, 197, 0.5)",
+    borderColor : "#360301",
+  },
+  recovered: {
+    backgroundColor : "rgba(225, 245, 228, 0.5)",
+    borderColor : "#05f525",
+  },
+};
 
+function LineGraph(props) {
+  const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+      const country = props.country === 'worldwide' ? 'all' : props.country;
+      await fetch(`https://disease.sh/v3/covid-19/historical/${country}?lastdays=120`)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          let chartData = buildChartData(data, casesType);
+          const chartData = buildChartData(data, props.caseType, props.country);
           setData(chartData);
-          console.log(chartData);
-          // buildChart(chartData);
         });
     };
 
     fetchData();
-  }, [casesType]);
+  },[props.caseType, props.country]);
 
   return (
-    <div className={className}>
+    <div className={props.className}>
       {data?.length > 0 && (
         <Line
           data={{
             datasets: [
               {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                backgroundColor: LineColour[props.caseType].backgroundColor,
+                borderColor: LineColour[props.caseType].borderColor,
                 data: data,
               },
             ],
